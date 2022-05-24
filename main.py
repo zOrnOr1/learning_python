@@ -1,8 +1,9 @@
-from lessons import lesson_2
+import lessons
 
 
 def main():
-    lesson_2()
+    lessons.lesson_1()
+    # lessons.lesson_2()
 
 
 if __name__ == "__main__":
