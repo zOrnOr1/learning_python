@@ -2,15 +2,31 @@
 from string import punctuation
 
 
+def part_decorator(func):
+    def wrapper(str_to_print: str):
+        print('\n')
+        print('=' * 30)
+        func(str_to_print)
+        print('=' * 30)
+
+    return wrapper
+
+
+@part_decorator
+def print_part(str_to_print: str):
+    print(str_to_print)
+
+
 def lesson_2():
     # Part 1
+    print_part('Part 1')
     print(f"Type of 15 * 3: {type(15 * 3)}")
     print(f"Type of 15 / 3: {type(15 / 3)}")
     print(f"Type of 15 // 2: {type(15 // 2)}")
     print(f"Type of 15 ** 2: {type(15 ** 2)}")
 
-    print("==========================================")
     # Part 2
+    print_part('Part 2')
     given_list = ['в', '5', 'часов', '17', 'минут', 'температура', 'воздуха', 'была', '+5', 'градусов']
 
     idx = 0
