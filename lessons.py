@@ -1,10 +1,10 @@
 ### GeekBrains lesson 2 + GitHub test ###
 from string import punctuation
-import datetime
 
 
 def lesson_decorator(func):
     def wrapper(*args: str):
+        print('\n')
         print('=' * 30)
         print(f"Lesson {args[0]}")
         func(*args)
@@ -43,10 +43,68 @@ def duration_print(*args):
             print(f'Result: {num // 86400} дн {num % 86400 // 3600} ч {num % 3600 // 60} мин {num % 3600 % 60} сек')
 
 
+def find_sum(list_of_nums: list):
+    """
+    :param list_of_nums:
+    :return: total_sum
+    """
+    total_sum = 0
+    for item in list_of_nums:
+        sum_num = 0
+        _temp = item
+        while item:
+            sum_num += item % 10
+            item //= 10
+        total_sum += _temp if sum_num % 7 == 0 else 0
+
+    return total_sum
+
+
+def my_dict_test(phrase: str):
+    if int(phrase) in range(10, 20):
+        phrase = phrase[len(phrase) - 2:]
+    else:
+        phrase = phrase[len(phrase) - 1:]
+    phrase_dict = {
+        "0": "процентов",
+        "1": "процент",
+        "2": "процента",
+        "3": "процента",
+        "4": "процента",
+        "11": "процентов",
+        "12": "процентов",
+        "13": "процентов",
+        "14": "процентов"
+    }
+    phrase_dict.setdefault(phrase, 'процентов')
+    return phrase_dict[phrase]
+
+
 def lesson_1():
     # Part 1
     part_print(1, 1)
     duration_print(53, 153, 4153, 400153, 123141341241)
+
+    # Part 2
+    part_print(1, 2)
+    cube_list = [num ** 3 for num in range(1, 1000, 2)]
+    print(f'Сгенерированный лист: {cube_list}')
+    print(f'List id = {id(cube_list)}')
+    # Task a
+    print('\nTask a:')
+    print(f'Сумма равна: {find_sum(cube_list)}')
+    # Task b
+    print('\nTask b + c:')
+    for idx, num in enumerate(cube_list):
+        cube_list[idx] = num + 17
+    print(f'List id = {id(cube_list)}')
+    print(f'Сумма равна: {find_sum(cube_list)}')
+
+    # Part 3
+    part_print(1, 3)
+
+    for val in range(21):
+        print(f"{str(val)} {my_dict_test(str(val))}")
 
 
 def lesson_2():
