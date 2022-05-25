@@ -125,27 +125,3 @@ def thesaurus(*args):
     for value in zip(l1, l2):
         _tmp[value[0]].append(value[1])
     return dict(_tmp)
-
-
-def thesaurus_adv(*args: str):
-    l1 = [value.partition(' ')[2][0] for value in args]  # Первая буква фамилии
-    # l2 = [value.partition(' ')[0][0] for value in args]  # Первая буква имени
-    l3 = [value for value in args]
-    _tmp = defaultdict(list)
-
-    for value in zip(l1, l3):
-        if value[1].partition(' ')[2][0] == value[0]:
-            _tmp[value[0]].append(value[1])
-    print(dict(_tmp))
-    for key in _tmp.keys():
-        for text in _tmp[key]:
-            _l1 = [item for item in text]
-        print(_l1)
-
-        _l2 = [text for text in _tmp[key]]
-
-        # _tmp[key].append()
-
-    # for name in args:
-    #     if name.partition(' ')[2][0] not in _tmp:
-    #         _tmp[name.partition(' ')[2][0]].append()
