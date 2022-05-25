@@ -92,13 +92,13 @@ def lesson_3():
     print(f"При невозможности перевода: {lib.num_translate('key')}")
 
     # Part 2
-    lib.part_print(3,2)
+    lib.part_print(3, 2)
     print(f"Asserted: One, Result: {lib.num_translate_adv('One')}")
     print(f"Asserted: one, Result: {lib.num_translate_adv('one')}")
 
     # Part 3
-    lib.part_print(3,3)
-    print(lib.thesaurus("Иван" , "Мария" , "Петр" , "Илья"))
+    lib.part_print(3, 3)
+    print(lib.thesaurus("Иван", "Мария", "Петр", "Илья"))
 
 
 if __name__ == "__main__":
