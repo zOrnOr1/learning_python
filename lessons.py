@@ -98,7 +98,7 @@ def lesson_3():
 
     # Part 3
     lib.part_print(3,3)
-    print(lib.thesaurus("Иван", "Петр", "Илья", "Авбек", "Август"))
+    print(lib.thesaurus("Иван" , "Мария" , "Петр" , "Илья"))
 
 
 if __name__ == "__main__":

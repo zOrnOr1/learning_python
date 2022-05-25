@@ -1,4 +1,4 @@
-from string import punctuation
+from collections import defaultdict
 
 
 def lesson_decorator(func):
@@ -117,5 +117,11 @@ def num_translate_adv(number_to_translate: str):
 
 
 def thesaurus(*args):
-    L1 = []
-    return _tmp
+    l1 = [value[0] for value in args]
+    l2 = [value for value in args]
+    _tmp = defaultdict(list)
+    # _tmp = dict(zip(l1, l2))
+    # _tmp = dict.fromkeys(key[0] for key in args)
+    for value in zip(l1, l2):
+        _tmp[value[0]].append(value[1])
+    return dict(_tmp)
