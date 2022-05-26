@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="05054e62-fcb7-4a04-bbf1-b15fc4d140f3" name="Changes" comment="" />
+=======
+    <list default="true" id="53d931b7-f623-4b4d-b3d7-1acf8f03e79c" name="Changes" comment="Test commit" />
+>>>>>>> Stashed changes
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
