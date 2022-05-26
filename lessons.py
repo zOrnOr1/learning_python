@@ -1,7 +1,6 @@
 ### GeekBrains lesson 2 + GitHub test ###
 import func_lib as lib
 from timeit import timeit
-from collections import OrderedDict
 
 
 def lesson_1():
@@ -117,6 +116,9 @@ def lesson_3():
     lib.part_print(3,5)
     print(lib.get_jokes(5, repeat=0))
 
+
+def lesson_4():
+    lib.currency_check('AUD')
 
 if __name__ == "__main__":
     lesson_1()
