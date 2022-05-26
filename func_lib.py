@@ -2,6 +2,7 @@ from collections import defaultdict
 from random import randrange
 from requests import get, utils
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
 
 def lesson_decorator(func):
@@ -183,6 +184,9 @@ def currency_check(*cur_code: str):
     site_encoding = utils.get_encoding_from_headers(currency_response.headers)
     content_decoded = currency_response.content.decode(encoding=site_encoding)
     myroot = ET.fromstring(content_decoded)
+    # x = datetime.strptime(myroot.attrib['Date'], "%d.%m.%Y")
+    # x = x.combine(x, datetime.time.)
+    print(myroot.attrib['Date'])
     _returnlist = []
     for code in cur_code:
         for x in myroot.findall('Valute'):
