@@ -113,6 +113,10 @@ def lesson_3():
     print({
         f'Sorted: {lib.thesaurus_adv_sorted("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева")}'})
 
+    # Part 5
+    lib.part_print(3,5)
+    print(lib.get_jokes(5))
+
 
 if __name__ == "__main__":
     lesson_1()

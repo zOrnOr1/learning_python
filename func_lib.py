@@ -1,4 +1,5 @@
 from collections import defaultdict
+from random import randrange
 
 
 def lesson_decorator(func):
@@ -154,3 +155,16 @@ def thesaurus_adv_sorted(*args):
             _tmp2[_key2[0]].append(value2)
         _tmp[key] = dict(_tmp2)
     return dict(_tmp)
+
+
+def get_jokes(jokes_num):
+    nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
+    adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
+    adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
+    _tmplist = []
+    for n in range(jokes_num):
+        _tmplist.append(
+            [nouns[randrange(len(nouns))], adverbs[randrange(len(adverbs))], adjectives[randrange(len(adjectives))]])
+    for idx, item in enumerate(_tmplist):
+        _tmplist[idx] = ' '.join(item)
+    return _tmplist
