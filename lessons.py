@@ -1,5 +1,6 @@
 ### GeekBrains lesson 2 + GitHub test ###
 import func_lib as lib
+from timeit import timeit
 
 
 def lesson_1():
@@ -98,7 +99,14 @@ def lesson_3():
 
     # Part 3
     lib.part_print(3, 3)
+    print(timeit('lib.thesaurus("Иван", "Мария", "Петр", "Илья")', number=1000, globals=globals()))
     print(lib.thesaurus("Иван", "Мария", "Петр", "Илья"))
+
+    # Part 4
+    lib.part_print(3, 4)
+    print(timeit('lib.thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева")',
+                 number=1000, globals=globals()))
+    print(lib.thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева"))
 
 
 if __name__ == "__main__":
