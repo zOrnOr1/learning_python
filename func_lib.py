@@ -157,14 +157,20 @@ def thesaurus_adv_sorted(*args):
     return dict(_tmp)
 
 
-def get_jokes(jokes_num):
+def get_jokes(jokes_num, repeat=0):
     nouns = ["автомобиль", "лес", "огонь", "город", "дом"]
     adverbs = ["сегодня", "вчера", "завтра", "позавчера", "ночью"]
     adjectives = ["веселый", "яркий", "зеленый", "утопичный", "мягкий"]
     _tmplist = []
     for n in range(jokes_num):
-        _tmplist.append(
-            [nouns[randrange(len(nouns))], adverbs[randrange(len(adverbs))], adjectives[randrange(len(adjectives))]])
+        if not repeat:
+            _tmplist.append(
+                [nouns.pop(randrange(len(nouns))), adverbs.pop(randrange(len(adverbs))),
+                 adjectives.pop(randrange(len(adjectives)))])
+        else:
+            _tmplist.append(
+                [nouns[randrange(len(nouns))], adverbs[randrange(len(adverbs))],
+                 adjectives[randrange(len(adjectives))]])
     for idx, item in enumerate(_tmplist):
         _tmplist[idx] = ' '.join(item)
     return _tmplist

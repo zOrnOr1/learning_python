@@ -115,7 +115,7 @@ def lesson_3():
 
     # Part 5
     lib.part_print(3,5)
-    print(lib.get_jokes(5))
+    print(lib.get_jokes(5, repeat=0))
 
 
 if __name__ == "__main__":
