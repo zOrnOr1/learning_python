@@ -113,12 +113,15 @@ def lesson_3():
         f'Sorted: {lib.thesaurus_adv_sorted("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева")}'})
 
     # Part 5
-    lib.part_print(3,5)
+    lib.part_print(3, 5)
     print(lib.get_jokes(5, repeat=0))
 
 
 def lesson_4():
-    lib.currency_check('AUD')
+    # Part 2
+    lib.part_print(4,2)
+    print(lib.currency_check('EUR', 'USD', 'HKD'))
+
 
 if __name__ == "__main__":
     lesson_1()

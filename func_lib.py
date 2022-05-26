@@ -1,8 +1,7 @@
 from collections import defaultdict
 from random import randrange
 from requests import get, utils
-from pyquery import PyQuery
-import xml.dom.minidom as md
+import xml.etree.ElementTree as ET
 
 
 def lesson_decorator(func):
@@ -179,9 +178,15 @@ def get_jokes(jokes_num, repeat=0):
     return _tmplist
 
 
-def currency_check(cur_code: str):
+def currency_check(*cur_code: str):
     currency_response = get('http://www.cbr.ru/scripts/XML_daily.asp')
     site_encoding = utils.get_encoding_from_headers(currency_response.headers)
     content_decoded = currency_response.content.decode(encoding=site_encoding)
-    myroot = md.parseString(content_decoded)
-    print(myroot.getElementsByTagName('CharCode')[1].firstChild.nodeValue)
+    myroot = ET.fromstring(content_decoded)
+    _returnlist = []
+    for code in cur_code:
+        for x in myroot.findall('Valute'):
+            if x.find('CharCode').text == code:
+                _returnlist.append([x.find('Name').text, x.find("Value").text])
+
+    return _returnlist
