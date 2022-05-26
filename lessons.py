@@ -1,6 +1,7 @@
 ### GeekBrains lesson 2 + GitHub test ###
 import func_lib as lib
 from timeit import timeit
+from collections import OrderedDict
 
 
 def lesson_1():
@@ -107,6 +108,10 @@ def lesson_3():
     print(timeit('lib.thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева")',
                  number=1000, globals=globals()))
     print(lib.thesaurus_adv("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева"))
+
+    # Part 4.1
+    print({
+        f'Sorted: {lib.thesaurus_adv_sorted("Иван Сергеев", "Инна Серова", "Петр Алексеев", "Илья Иванов", "Анна Савельева")}'})
 
 
 if __name__ == "__main__":

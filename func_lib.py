@@ -139,3 +139,18 @@ def thesaurus_adv(*args: str):
             _tmp2[_key2[0]].append(value2)
         _tmp[key] = dict(_tmp2)
     return dict(_tmp)
+
+
+def thesaurus_adv_sorted(*args):
+    l1 = sorted([value.partition(' ')[2][0] for value in args])  # Первая буква фамилии
+    l3 = sorted(list(args))
+    _tmp = defaultdict(list)
+    for _key, value in zip(l1, l3):
+        _tmp[_key[0]].append(value)
+    for key in _tmp.keys():
+        _l1 = [value.partition(' ')[0] for value in _tmp[key]]
+        _tmp2 = defaultdict(list)
+        for _key2, value2 in zip(_l1, _tmp[key]):
+            _tmp2[_key2[0]].append(value2)
+        _tmp[key] = dict(_tmp2)
+    return dict(_tmp)
