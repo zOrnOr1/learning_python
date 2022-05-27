@@ -126,21 +126,58 @@ def lesson_4():
 
 def lesson_5():
     # Part 1
-    lib.part_print(5, 1)
+    # lib.part_print(5, 1)
+    #
+    # odd_nums_print = lib.odd_nums(15)
+    # print(next(odd_nums_print))
+    # print(next(odd_nums_print))
+    # print(next(odd_nums_print))
+    # print(next(odd_nums_print))
+    #
+    # # Part 2
+    # lib.part_print(5, 2)
+    #
+    # odd_nums_noyield_print = lib.odd_nums_noyield(15)
+    # print(next(odd_nums_noyield_print))
+    # print(next(odd_nums_noyield_print))
+    # print(next(odd_nums_noyield_print))
 
-    odd_nums_print = lib.odd_nums(15)
-    print(next(odd_nums_print))
-    print(next(odd_nums_print))
-    print(next(odd_nums_print))
-    print(next(odd_nums_print))
+    # Part 3
+    # lib.part_print(5, 3)
+    #
+    # tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена']
+    # klasses = ['9А', '7В', '9Б', '9В', '8Б', '10А']
+    # cort_gen = lib.cort_task(tutors, klasses)
+    # print(type(cort_gen))
+    # print(*cort_gen)
 
-    # Part 2
-    lib.part_print(5, 2)
+    # Part 4
+    # lib.part_print(5, 4)
+    # src = [-300, -298, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+    # iters = 1000
+    # print(f'Asserted: {src}')
+    # print('Result: {}'.format(lib.next_more_previous(src)))
+    # print('Time required for {} iterations: {} сек'.format(iters, timeit('lib.next_more_previous(src)', number=iters,
+    #                                                                      globals=globals(), setup=f'src = {src}')))
 
-    odd_nums_noyield_print = lib.odd_nums_noyield(15)
-    print(next(odd_nums_noyield_print))
-    print(next(odd_nums_noyield_print))
-    print(next(odd_nums_noyield_print))
+    # Part 5
+    lib.part_print(5, 5)
+
+    iters = 1000
+    src_5 = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+    try:
+        assert lib.no_intersect(src_5) == [23, 1, 3, 10, 4, 11], "Assertion Failed"
+    except AssertionError:
+        print('Failed')
+
+    print('Time required for {} iterations: {} сек'.format(iters, timeit('lib.no_intersect(src_5)', number=iters,
+                                                                         globals=globals(),
+                                                                         setup=f'src_5 = {src_5}')))
+    print('Time required for 2nd {} iterations: {} сек'.format(iters, timeit('lib.no_intersect_2(src_5)', number=iters,
+                                                                             globals=globals(),
+                                                                             setup=f'src_5 = {src_5}')))
+    lib.easy_timeit(lib.no_intersect_2, src_5, iters=10000)
+    print(lib.no_intersect(src_5))
 
 
 if __name__ == "__main__":

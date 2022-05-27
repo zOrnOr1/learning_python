@@ -1,8 +1,23 @@
-from collections import defaultdict
-from random import randrange
-from requests import get, utils
 import xml.etree.ElementTree as ET
+from collections import defaultdict, Counter
+from copy import deepcopy
 from datetime import datetime
+from random import randrange
+from timeit import timeit
+import inspect
+
+from requests import get, utils
+
+
+def easy_timeit(func, params, iters=1000):
+    def retrieve_name(var):
+        callers_local_vars = inspect.currentframe().f_back.f_locals.items()
+        return [var_name for var_name, var_val in callers_local_vars if var_val is var]
+
+    func_str = f"{func.__name__}({retrieve_name(params)[0]})"
+    setup_str = f"{retrieve_name(params)[0]} = {params}"
+    print('Time required for {} iterations: {} сек'.format(iters, timeit(func_str, number=iters, globals=globals(),
+                                                                         setup=setup_str)))
 
 
 def lesson_decorator(func):
@@ -203,3 +218,38 @@ def odd_nums(max_value):
 
 def odd_nums_noyield(max_value):
     return (value for value in range(max_value + 1) if value % 2 != 0)
+
+
+def cort_task(tutors: list, klasses: list):
+    for x in range(len(tutors) - len(klasses)):
+        klasses.append(None)
+    return ((tutor, klass) for tutor, klass in zip(tutors, klasses))
+
+
+def next_more_previous(src: list):
+    list_gen = (item for item in src)
+    _tmp = []
+    _a = src[0]
+    for _b in list_gen:
+        if _a < _b:
+            _tmp.append(_b)
+        _a = _b
+
+    return _tmp
+
+
+def no_intersect(src: list):
+    temp_list = deepcopy(src)
+    list_gen = (item for item in temp_list)
+    _tmp = []
+    for _b in list_gen:
+        src.remove(_b)
+        if _b not in src:
+            _tmp.append(_b)
+        src.append(_b)
+
+    return _tmp
+
+
+def no_intersect_2(src: list):
+    return [item for item, count in Counter(src).items() if count == 1]
