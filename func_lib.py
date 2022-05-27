@@ -221,8 +221,7 @@ def odd_nums_noyield(max_value):
 
 
 def cort_task(tutors: list, klasses: list):
-    for x in range(len(tutors) - len(klasses)):
-        klasses.append(None)
+    [klasses.append(None) for _ in range(len(tutors) - len(klasses))]
     return ((tutor, klass) for tutor, klass in zip(tutors, klasses))
 
 

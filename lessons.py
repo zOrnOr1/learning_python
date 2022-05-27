@@ -143,13 +143,13 @@ def lesson_5():
     # print(next(odd_nums_noyield_print))
 
     # Part 3
-    # lib.part_print(5, 3)
-    #
-    # tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена']
-    # klasses = ['9А', '7В', '9Б', '9В', '8Б', '10А']
-    # cort_gen = lib.cort_task(tutors, klasses)
-    # print(type(cort_gen))
-    # print(*cort_gen)
+    lib.part_print(5, 3)
+
+    tutors = ['Иван', 'Анастасия', 'Петр', 'Сергей', 'Дмитрий', 'Борис', 'Елена']
+    klasses = ['9А', '7В', '9Б', '9В', '8Б', '10А']
+    cort_gen = lib.cort_task(tutors, klasses)
+    print(type(cort_gen))
+    print(*cort_gen)
 
     # Part 4
     # lib.part_print(5, 4)
