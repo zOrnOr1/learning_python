@@ -119,7 +119,7 @@ def lesson_3():
 
 def lesson_4():
     # Part 2
-    lib.part_print(4,2)
+    lib.part_print(4, 2)
     print(lib.currency_check('EUR', 'USD', 'HKD'))
 
 
