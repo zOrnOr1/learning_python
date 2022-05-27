@@ -193,3 +193,13 @@ def currency_check(*cur_code: str):
                 _returnlist.update({x.find('Name').text: x.find("Value").text})
 
     return _returnlist
+
+
+def odd_nums(max_value):
+    for value in range(max_value + 1):
+        if value % 2 != 0:
+            yield value
+
+
+def odd_nums_noyield(max_value):
+    return (value for value in range(max_value + 1) if value % 2 != 0)

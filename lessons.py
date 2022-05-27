@@ -1,6 +1,7 @@
 ### GeekBrains lesson 2 + GitHub test ###
-import func_lib as lib
 from timeit import timeit
+
+import func_lib as lib
 
 
 def lesson_1():
@@ -121,6 +122,25 @@ def lesson_4():
     # Part 2
     lib.part_print(4, 2)
     print(lib.currency_check('EUR', 'USD', 'HKD'))
+
+
+def lesson_5():
+    # Part 1
+    lib.part_print(5, 1)
+
+    odd_nums_print = lib.odd_nums(15)
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+
+    # Part 2
+    lib.part_print(5, 2)
+
+    odd_nums_noyield_print = lib.odd_nums_noyield(15)
+    print(next(odd_nums_noyield_print))
+    print(next(odd_nums_noyield_print))
+    print(next(odd_nums_noyield_print))
 
 
 if __name__ == "__main__":
