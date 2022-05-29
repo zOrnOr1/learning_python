@@ -5,6 +5,8 @@ from datetime import datetime
 from random import randrange
 from timeit import timeit
 import inspect
+from string import punctuation
+from os import stat, curdir
 
 from requests import get, utils
 
@@ -252,3 +254,39 @@ def no_intersect(src: list):
 
 def no_intersect_2(src: list):
     return [item for item, count in Counter(src).items() if count == 1]
+
+
+def github_example_parse(filename, url):
+    from re import compile
+    message_format = compile(
+        r'(?P<IP>(?:\d{1,3}\.){3}\d{1,3}).*?(?P<datetime>\[.*?\]).*?"(?P<oper>\w+) (?P<address>.*?)"(?P<other>.+)')
+    try:
+        with open(filename, 'x') as f:
+            file_res = get(url)
+            site_encoding = utils.get_encoding_from_headers(file_res.headers)
+            content_decoded = file_res.content.decode(encoding=site_encoding)
+            f.write(content_decoded)
+    except FileExistsError:
+        if stat(curdir + '/' + filename).st_size == 0:
+            with open(filename, 'w') as f:
+                file_res = get(url)
+                site_encoding = utils.get_encoding_from_headers(file_res.headers)
+                content_decoded = file_res.content.decode(encoding=site_encoding)
+                f.write(content_decoded)
+    with open(filename, 'r') as f:
+        newline = (item for item in f)
+        try:
+            for line in newline:
+                match = message_format.match(line)
+                parsed_ip = match.group('IP')
+                parsed_oper = match.group('oper')
+                parsed_addr = match.group(('address'))
+                yield parsed_ip, parsed_oper, parsed_addr
+        except AttributeError:
+            message_format_bad = compile(
+                r'(?P<IP>.*?) -.*?(?P<datetime>\[.*?\]).*?"(?P<oper>\w+) (?P<address>.*?)"(?P<other>.+)')
+            match = message_format_bad.match(line)
+            parsed_ip = match.group('IP')
+            parsed_oper = match.group('oper')
+            parsed_addr = match.group(('address'))
+            yield f'Not usual IP: {parsed_ip}', parsed_oper, parsed_addr

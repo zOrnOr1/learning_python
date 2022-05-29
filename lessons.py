@@ -30,6 +30,8 @@ def lesson_1():
     for val in range(21):
         print(f"{str(val)} {lib.my_dict_test(str(val))}")
 
+    return 0
+
 
 def lesson_2():
     # Part 1
@@ -72,6 +74,8 @@ def lesson_2():
         except IndexError:
             pass
     print(given_list)
+
+    return 0
 
 
 def lesson_3():
@@ -117,30 +121,34 @@ def lesson_3():
     lib.part_print(3, 5)
     print(lib.get_jokes(5, repeat=0))
 
+    return 0
+
 
 def lesson_4():
     # Part 2
     lib.part_print(4, 2)
     print(lib.currency_check('EUR', 'USD', 'HKD'))
 
+    return 0
+
 
 def lesson_5():
     # Part 1
-    # lib.part_print(5, 1)
-    #
-    # odd_nums_print = lib.odd_nums(15)
-    # print(next(odd_nums_print))
-    # print(next(odd_nums_print))
-    # print(next(odd_nums_print))
-    # print(next(odd_nums_print))
-    #
+    lib.part_print(5, 1)
+
+    odd_nums_print = lib.odd_nums(15)
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+    print(next(odd_nums_print))
+
     # # Part 2
-    # lib.part_print(5, 2)
-    #
-    # odd_nums_noyield_print = lib.odd_nums_noyield(15)
-    # print(next(odd_nums_noyield_print))
-    # print(next(odd_nums_noyield_print))
-    # print(next(odd_nums_noyield_print))
+    lib.part_print(5, 2)
+
+    odd_nums_noyield_print = lib.odd_nums_noyield(15)
+    print(next(odd_nums_noyield_print))
+    print(next(odd_nums_noyield_print))
+    print(next(odd_nums_noyield_print))
 
     # Part 3
     lib.part_print(5, 3)
@@ -152,13 +160,13 @@ def lesson_5():
     print(*cort_gen)
 
     # Part 4
-    # lib.part_print(5, 4)
-    # src = [-300, -298, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
-    # iters = 1000
-    # print(f'Asserted: {src}')
-    # print('Result: {}'.format(lib.next_more_previous(src)))
-    # print('Time required for {} iterations: {} сек'.format(iters, timeit('lib.next_more_previous(src)', number=iters,
-    #                                                                      globals=globals(), setup=f'src = {src}')))
+    lib.part_print(5, 4)
+    src = [-300, -298, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55]
+    iters = 1000
+    print(f'Asserted: {src}')
+    print('Result: {}'.format(lib.next_more_previous(src)))
+    print('Time required for {} iterations: {} сек'.format(iters, timeit('lib.next_more_previous(src)', number=iters,
+                                                                         globals=globals(), setup=f'src = {src}')))
 
     # Part 5
     lib.part_print(5, 5)
@@ -177,7 +185,18 @@ def lesson_5():
                                                                              globals=globals(),
                                                                              setup=f'src_5 = {src_5}')))
     lib.easy_timeit(lib.no_intersect_2, src_5, iters=10000)
-    print(lib.no_intersect(src_5))
+    print(lib.no_intersect_2(src_5))
+
+    return 0
+
+
+def lesson_6():
+    messages = lib.github_example_parse('git_example_file.txt',
+                             "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs")
+    print(*messages)
+    # print(next(messages))
+    # print(next(messages))
+    return 0
 
 
 if __name__ == "__main__":
