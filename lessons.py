@@ -191,17 +191,31 @@ def lesson_5():
 
 
 def lesson_6():
-    def time_func():
-        messages = lib.github_example_parse('git_example_file.txt',
-                                            "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs")
-        ip_dict = defaultdict(int)
-        for message in messages:
-            ip_dict.update({message[0]: ip_dict[message[0]] + 1})
-        spammer_ip_counts = max(ip_dict.items(), key=lambda k: k[1])
-        print(f"Spammer's IP is {spammer_ip_counts[0]} with {spammer_ip_counts[1]} requests")
-    lib.simple_timeit(time_func, retries=5, suppress_print=False, print_once=True)
+    # # Part 1 + 2
+    # lib.part_print(6, '1 + 2')
+    #
+    # def time_func():
+    #     messages = lib.github_example_parse('git_example_file.txt',
+    #                                         "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs")
+    #     ip_dict = defaultdict(int)
+    #     for message in messages:
+    #         ip_dict.update({message[0]: ip_dict[message[0]] + 1})
+    #     spammer_ip_counts = max(ip_dict.items(), key=lambda k: k[1])
+    #     print(f"Spammer's IP is {spammer_ip_counts[0]} with {spammer_ip_counts[1]} requests")
+    #
+    # lib.simple_timeit(time_func, retries=5, suppress_print=False, print_once=True)
 
-    return 0
+    # Part 3
+    lib.part_print(6, 3)
+    print(lib.csv_files_write('file_to_write_lesson_6.csv'))
+
+
+    # Part 4
+    lib.part_print(6, 4)
+    print(lib.csv_files_write_nodict('nodict_file.txt'))
+
+
+    # return 0
 
 
 if __name__ == "__main__":

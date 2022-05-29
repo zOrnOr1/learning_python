@@ -8,6 +8,8 @@ import inspect
 from string import punctuation
 from os import stat, curdir
 import time
+import csv
+import itertools
 
 # Imports for suppressing print statements
 import contextlib, sys
@@ -351,3 +353,70 @@ def github_example_parse(filename, url):
             parsed_oper = match.group('oper')
             parsed_addr = match.group(('address'))
             yield f'Not usual IP: {parsed_ip}', parsed_oper, parsed_addr
+
+
+def csv_files_write(filename):
+    #
+    # with open('hobbies.csv', 'w', newline='') as f:
+    #     # lines = [
+    #     #     'Иванов,Иван,Иванович',
+    #     #     'Петров,Петр,Петрович'
+    #     # ]
+    #     lines = [
+    #         'скалолазание,охота',
+    #         'горные лыжи'
+    #     ]
+    #     print(lines)
+    #     csv_file_writer = csv.writer(f, dialect='excel', delimiter='\n', quoting=csv.QUOTE_NONE)
+    #     csv_file_writer.writerow(lines)
+
+    with open(filename, 'w', newline='') as write_file:
+        csv_file_writer = csv.writer(write_file, dialect='excel', delimiter=':', quoting=csv.QUOTE_NONE)
+        with open('names.csv', 'r') as f:
+            with open('hobbies.csv', 'r') as f2:
+                csv_reader_1 = csv.reader(f, dialect='excel', delimiter='\n')
+                csv_reader_2 = csv.reader(f2, dialect='excel', delimiter='\n')
+                final_dict = {}
+
+                for (key, value) in itertools.zip_longest(csv_reader_1, csv_reader_2, fillvalue='None'):
+                    if key not in ['None', '']:
+                        if value == ['']:
+                            value = 'None'
+                        final_dict.update({''.join(key): ''.join(value)})
+                    else:
+                        return 1
+
+        csv_file_writer.writerows(final_dict.items())
+    return f'Wrote to file {filename}'
+
+def csv_files_write_nodict(filename):
+    #
+    # with open('hobbies.csv', 'w', newline='') as f:
+    #     # lines = [
+    #     #     'Иванов,Иван,Иванович',
+    #     #     'Петров,Петр,Петрович'
+    #     # ]
+    #     lines = [
+    #         'скалолазание,охота',
+    #         'горные лыжи'
+    #     ]
+    #     print(lines)
+    #     csv_file_writer = csv.writer(f, dialect='excel', delimiter='\n', quoting=csv.QUOTE_NONE)
+    #     csv_file_writer.writerow(lines)
+
+    with open(filename, 'w') as write_file:
+        with open('names.csv', 'r') as f:
+            with open('hobbies.csv', 'r') as f2:
+                csv_reader_1 = csv.reader(f, dialect='excel', delimiter='\n')
+                csv_reader_2 = csv.reader(f2, dialect='excel', delimiter='\n')
+
+                for (key, value) in itertools.zip_longest(csv_reader_1, csv_reader_2, fillvalue='None'):
+                    if key not in ['None', '']:
+                        if value == ['']:
+                            value = 'None'
+                        # final_dict.update({''.join(key): ''.join(value)})
+                        write_file.write(f"{''.join(key)}: {''.join(value)}\n")
+                    else:
+                        return 1
+
+    return f'Wrote to file {filename}'

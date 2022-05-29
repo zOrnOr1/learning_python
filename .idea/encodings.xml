@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/11.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/file_to_write_lesson_6.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/hobbies.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/names.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/nodict_file.txt" charset="windows-1251" />
+  </component>
+</project>
