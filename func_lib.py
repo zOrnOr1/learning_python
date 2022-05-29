@@ -7,8 +7,37 @@ from timeit import timeit
 import inspect
 from string import punctuation
 from os import stat, curdir
+import time
+
+# Imports for suppressing print statements
+import contextlib, sys
+from io import StringIO
 
 from requests import get, utils
+
+
+# context manager for no print
+@contextlib.contextmanager
+def nostdout(print_once=False):
+    """
+
+    Prevent print to stdout, but if there was an error then catch it and
+    print the output before raising the error.
+    """
+
+    saved_stdout = sys.stdout
+    sys.stdout = StringIO()
+    try:
+        yield
+    except Exception:
+        saved_output = sys.stdout
+        sys.stdout = saved_stdout
+        print(saved_output.getvalue())
+        raise
+    saved_output = sys.stdout
+    sys.stdout = saved_stdout
+    if print_once:
+        print(saved_output.getvalue())
 
 
 def easy_timeit(func, params, iters=1000):
@@ -210,6 +239,38 @@ def currency_check(*cur_code: str):
                 _returnlist.update({x.find('Name').text: x.find("Value").text})
 
     return _returnlist
+
+
+def simple_timeit(func, retries=1, suppress_print=False, print_once=False):
+    """
+    Takes function to time it execution
+
+    :param func: function to time
+    :param retries: number of retries
+    :param suppress_print: suppresses prints to stdout of func
+    :param print_once: print func's print once even if print is suppressed
+    :return: None
+    """
+    start_time = time.time()
+    retries -= int(print_once)
+    for _ in range(retries):
+        if suppress_print:
+            with nostdout():
+                func()
+        elif print_once and not suppress_print:
+            with nostdout():
+                func()
+        else:
+            func()
+
+    if print_once:
+        with nostdout(print_once):
+            func()
+
+    # if print_once and suppress_print:
+    #     print(StringIO().getvalue())
+    print("--- Execution took {} ms, number of retries: {} ---".format(round((time.time() - start_time) * 1000, 2),
+                                                                       retries+int(print_once)))
 
 
 def odd_nums(max_value):
