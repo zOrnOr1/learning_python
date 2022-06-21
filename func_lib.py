@@ -11,6 +11,7 @@ import time
 import csv
 import itertools
 from re import compile
+import shutil
 from copy import copy
 
 # Imports for suppressing print statements
@@ -443,24 +444,40 @@ def build_structure(filename) -> None:
 
             if extension is None:
                 if last_pathlen > len(start):
-                    for _ in range(int((last_pathlen - len(start))/2)):
+                    for _ in range(int((last_pathlen - len(start)) / 2)):
                         os.chdir('..')
                 if len(start) > last_pathlen:
                     try:
                         os.chdir(last_name)
                     except OSError:
                         pass
-                os.mkdir(name)
+                try:
+                    os.mkdir(name)
+                except FileExistsError:
+                    print(f'Dir {name} already exists')
             else:
                 if len(start) > last_pathlen:
                     os.chdir(last_name)
                 if last_pathlen > len(start):
-                    for _ in range(int((last_pathlen - len(start))/2)):
+                    for _ in range(int((last_pathlen - len(start)) / 2)):
                         os.chdir('..')
-                with open(f'{name}{extension}', 'x'):
-                    pass
+                try:
+                    with open(f'{name}{extension}', 'x'):
+                        pass
+                except FileExistsError:
+                    print(f'File {name}{extension} already exists')
             last_pathlen = len(start)
             last_name = name
-            # if len(start) < last_pathlen:
 
-            # print(f'Start = {start}', f'name = {name}', f'ext = {extension}')
+
+def gather_templates() -> None:
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    # try:
+    #     os.mkdir('my_project/global_templates')
+    # except FileExistsError:
+    #     pass
+    for root, dirs, files in os.walk(os.path.join(ROOT_DIR, 'my_project')):
+        for dir in dirs:
+            if dir == 'templates':
+                print(shutil.copytree(os.path.join(root, dir), os.path.join(ROOT_DIR, 'my_project\global_templates'),
+                                      dirs_exist_ok=True))

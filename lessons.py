@@ -250,8 +250,13 @@ def lesson_7() -> None:
     # lib.simple_timeit(dir_scanner_2, retries=100, print_once=True)
 
     # Part 1 + 2
-    lib.part_print(7, '1 + 2')
+    lib.part_print('7', '1 + 2')
     lib.build_structure('config.yaml')
+
+    lib.part_print('7', '3')
+    lib.gather_templates()
+
+
 
 
 
