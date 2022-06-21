@@ -5,11 +5,13 @@ from datetime import datetime
 from random import randrange
 from timeit import timeit
 import inspect
-from string import punctuation
+import os
 from os import stat, curdir
 import time
 import csv
 import itertools
+from re import compile
+from copy import copy
 
 # Imports for suppressing print statements
 import contextlib, sys
@@ -243,7 +245,7 @@ def currency_check(*cur_code: str):
     return _returnlist
 
 
-def simple_timeit(func, retries=1, suppress_print=False, print_once=False):
+def simple_timeit(func, retries=1, suppress_print=False, print_once=False) -> None:
     """
     Takes function to time it execution
 
@@ -253,7 +255,7 @@ def simple_timeit(func, retries=1, suppress_print=False, print_once=False):
     :param print_once: print func's print once even if print is suppressed
     :return: None
     """
-    start_time = time.time()
+    start_time = time.monotonic_ns()
     retries -= int(print_once)
     for _ in range(retries):
         if suppress_print:
@@ -269,10 +271,8 @@ def simple_timeit(func, retries=1, suppress_print=False, print_once=False):
         with nostdout(print_once):
             func()
 
-    # if print_once and suppress_print:
-    #     print(StringIO().getvalue())
-    print("--- Execution took {} ms, number of retries: {} ---".format(round((time.time() - start_time) * 1000, 2),
-                                                                       retries+int(print_once)))
+    print("--- Execution took {} ms, number of retries: {} ---".format((time.monotonic_ns() - start_time) / 1_000_000,
+                                                                       retries + int(print_once)))
 
 
 def odd_nums(max_value):
@@ -389,6 +389,7 @@ def csv_files_write(filename):
         csv_file_writer.writerows(final_dict.items())
     return f'Wrote to file {filename}'
 
+
 def csv_files_write_nodict(filename):
     #
     # with open('hobbies.csv', 'w', newline='') as f:
@@ -420,3 +421,46 @@ def csv_files_write_nodict(filename):
                         return 1
 
     return f'Wrote to file {filename}'
+
+
+def build_structure(filename) -> None:
+    last_pathlen = 0
+    last_name = ''
+    root = os.path.abspath(os.path.curdir)
+    print(root)
+    start_len_pattern = r'(?P<level>[\s\|\-]+)(?P<name>[^\.]+)(?P<extention>\.{1,}[^\.]+)?'
+    pattern_match = compile(start_len_pattern)
+    with open(filename, 'r') as f:
+        for line in f:
+            match = pattern_match.match(line)
+
+            start = match.group('level')
+            name = match.group('name').strip()
+            try:
+                extension = match.group('extention').strip()
+            except AttributeError:
+                extension = None
+
+            if extension is None:
+                if last_pathlen > len(start):
+                    for _ in range(int((last_pathlen - len(start))/2)):
+                        os.chdir('..')
+                if len(start) > last_pathlen:
+                    try:
+                        os.chdir(last_name)
+                    except OSError:
+                        pass
+                os.mkdir(name)
+            else:
+                if len(start) > last_pathlen:
+                    os.chdir(last_name)
+                if last_pathlen > len(start):
+                    for _ in range(int((last_pathlen - len(start))/2)):
+                        os.chdir('..')
+                with open(f'{name}{extension}', 'x'):
+                    pass
+            last_pathlen = len(start)
+            last_name = name
+            # if len(start) < last_pathlen:
+
+            # print(f'Start = {start}', f'name = {name}', f'ext = {extension}')

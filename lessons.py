@@ -3,6 +3,9 @@ from timeit import timeit, default_timer
 import func_lib as lib
 from collections import defaultdict
 
+import os
+import random
+
 
 def lesson_1():
     # Part 1
@@ -191,31 +194,66 @@ def lesson_5():
 
 
 def lesson_6():
-    # # Part 1 + 2
-    # lib.part_print(6, '1 + 2')
-    #
-    # def time_func():
-    #     messages = lib.github_example_parse('git_example_file.txt',
-    #                                         "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs")
-    #     ip_dict = defaultdict(int)
-    #     for message in messages:
-    #         ip_dict.update({message[0]: ip_dict[message[0]] + 1})
-    #     spammer_ip_counts = max(ip_dict.items(), key=lambda k: k[1])
-    #     print(f"Spammer's IP is {spammer_ip_counts[0]} with {spammer_ip_counts[1]} requests")
-    #
-    # lib.simple_timeit(time_func, retries=5, suppress_print=False, print_once=True)
+    # Part 1 + 2
+    lib.part_print(6, '1 + 2')
+
+    def time_func():
+        messages = lib.github_example_parse('git_example_file.txt',
+                                            "https://raw.githubusercontent.com/elastic/examples/master/Common%20Data%20Formats/nginx_logs/nginx_logs")
+        ip_dict = defaultdict(int)
+        for message in messages:
+            ip_dict.update({message[0]: ip_dict[message[0]] + 1})
+        spammer_ip_counts = max(ip_dict.items(), key=lambda k: k[1])
+        print(f"Spammer's IP is {spammer_ip_counts[0]} with {spammer_ip_counts[1]} requests")
+
+    lib.simple_timeit(time_func, retries=5, suppress_print=False, print_once=True)
 
     # Part 3
     lib.part_print(6, 3)
     print(lib.csv_files_write('file_to_write_lesson_6.csv'))
 
-
     # Part 4
     lib.part_print(6, 4)
     print(lib.csv_files_write_nodict('nodict_file.txt'))
 
-
     # return 0
+
+
+def lesson_7() -> None:
+    # Lesson tests
+    # folder = 'test_data'
+    #
+    # def file_generator():
+    #     letters = [chr(code) for code in range(ord('a'), ord('z') + 1)]
+    #     for _ in range(10 ** 3):
+    #         f_name = ''.join((random.sample(letters, random.randint(5, 10))))
+    #         f_content = bytes(random.randint(0, 255) for _ in range(random.randrange(10 ** 5)))
+    #         with open(os.path.join(folder, f'{f_name}.bin'), 'wb') as f:
+    #             f.write(f_content)
+    #
+    # def dir_scanner_1():
+    #     size_threshold = 15 * 2 ** 10
+    #     small_files = [item
+    #                    for item in os.listdir(folder)
+    #                    if os.stat(os.path.join(folder, item)).st_size < size_threshold]
+    #     print(len(small_files))
+    #
+    # def dir_scanner_2():
+    #     size_threshold = 15 * 2 ** 10
+    #     small_files = [item.name
+    #                    for item in os.scandir(folder)
+    #                    if item.stat().st_size < size_threshold]
+    #     print(len(small_files))
+    #
+    # # file_generator()
+    # lib.simple_timeit(dir_scanner_1, retries=100, print_once=True)
+    # lib.simple_timeit(dir_scanner_2, retries=100, print_once=True)
+
+    # Part 1 + 2
+    lib.part_print(7, '1 + 2')
+    lib.build_structure('config.yaml')
+
+
 
 
 if __name__ == "__main__":

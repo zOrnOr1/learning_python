@@ -7,8 +7,8 @@ def main():
     # lessons.lesson_3()
     # lessons.lesson_4()
     # lessons.lesson_5()
-    answer = lessons.lesson_6()
-    exit(answer)
+    # lessons.lesson_6()
+    lessons.lesson_7()
     # return 0
 
 
